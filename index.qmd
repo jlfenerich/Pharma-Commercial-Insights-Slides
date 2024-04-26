@@ -24,6 +24,34 @@ The second step of this project involves the careful import of data from CSV fil
 
 ---
 
+# Github repository schema
+
+```
+├── README.md                                    <- Project documentation.
+├── data
+│   ├── BASE_OBJETIVOS.csv                        <- Raw data to be normalized.
+│   └── BASE_VENDAS.csv                           <- Raw data to be normalized.
+│
+├── docs                                          <- Diagram in .png
+│
+├── sql_scripts
+│   ├── normalization
+│   │   ├── LOAD_OBJETIVO.sql                     <- Script to load normalized data into OBJETIVO table.
+│   │   ├── LOAD_VENDA.sql                        <- Script to load normalized data into VENDA table.
+│   │   ├── Normalizacao_CreateTempTABLES.sql     <- Script to create temporary table.
+│   │   ├── Normalizacao_InsertCSVtoTempTABLE.sql <- Script to load CSV data into temporary table.
+│   │   ├── Normalizacao_TempObjetivos-CD.sql     <- Script for normalization with related codes.
+│   │   └── Normalizacao_TempVendas-CD.sql        <- Script for normalization with related codes.
+│   ├── queries
+│   │   └── 3_Perguntas.sql                       <- Questions to be answered using the data.
+│   └── setup
+│       ├── 0_CreateDatabase.sql                  <- Script to create the database.
+│       ├── 1_CreateTable.sql                     <- Script to create relational tables.
+│       └── 2_Insert.sql                          <- Data insertion.
+```
+
+---
+
 ## Data Normalization and Structuring
 
 The normalization step follows, where imported data are restructured and optimized. Scripts for this phase are available in the `sql_script/normalization` folder.
