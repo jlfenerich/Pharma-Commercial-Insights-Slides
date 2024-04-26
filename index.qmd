@@ -1,6 +1,6 @@
 ---
 title: "Pharma Commercial Insights"
-author: João Fenerich
+author: João Lucio de Azevedo Fenerich
 format: 
   revealjs:
     slide-level: 1
