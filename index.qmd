@@ -1,0 +1,36 @@
+---
+title: "Pharma Commercial Insights"
+author: João Fenerich
+format: 
+  revealjs:
+    slide-level: 1
+    theme: moon
+    slide-number: c/t
+---
+
+## Project Setup
+
+### Tools Used
+![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927.svg?style=for-the-badge&logo=Microsoft-SQL-Server&logoColor=white) ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-007ACC.svg?style=for-the-badge&logo=Visual-Studio-Code&logoColor=white) ![DBeaver](https://img.shields.io/badge/DBeaver-382923.svg?style=for-the-badge&logo=DBeaver&logoColor=white)
+
+
+### Installation and Configuration of SQL Server Locally
+
+The first step was to install and configure SQL Server on my machine and connect it to DBeaver for data handling.
+
+### CSV Import to SQL Server
+
+The second step of this project involves the careful import of data from CSV files into temporary tables in SQL Server.
+
+---
+
+## Data Normalization and Structuring
+
+The normalization step follows, where imported data are restructured and optimized. Scripts for this phase are available in the `sql_script/normalization` folder.
+
+---
+
+
+<footer>
+<p align="left">Visit my website: <a href="http://www.joaofenerichdata.com">www.joaofenerichdata.com</a></p>
+</footer>

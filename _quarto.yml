@@ -1,0 +1,34 @@
+---
+format:
+  revealjs:
+    title-block-style: none
+    slide-number: c
+    title-slide-style: default
+    chalkboard:
+      buttons: false
+    auto-animate: true
+    reference-location: section
+    touch: true
+    pause: false
+    footnotes-hover: true
+    citations-hover: true
+    preview-links: true
+    controls-tutorial: true
+    controls: false
+    logo: "https://raw.githubusercontent.com/saforem2/anl-job-talk/main/docs/assets/anl.svg"
+    history: false
+    theme: [dark, css/dark.scss]
+    css: [css/default.css, css/callouts.css]
+    self-contained: false
+    embed-resources: false
+    self-contained-math: false
+    center: true
+    highlight-style: "atom-one"
+    default-image-extension: svg
+    code-line-numbers: true
+    code-overflow: scroll
+    html-math-method: katex
+    fig-align: center
+    mermaid:
+      theme: dark
+---
