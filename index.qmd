@@ -36,7 +36,7 @@ The second step of this project involves the careful import of data from CSV fil
 
 <div style="font-size:27px">
 ```
-├── README.md                                    <- Project documentation.
+├── README.md                                     <- Project documentation.
 ├── data
 │   ├── BASE_OBJETIVOS.csv                        <- Raw data to be normalized.
 │   └── BASE_VENDAS.csv                           <- Raw data to be normalized.
