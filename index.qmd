@@ -65,11 +65,15 @@ The second step of this project involves the careful import of data from CSV fil
 
 ## Data Normalization and Structuring
 
-<div style="font-size:32px">
+<div style="font-size:26px">
 
 The normalization step follows, where imported data are restructured and optimized. Scripts for this phase are available in the `sql_script/normalization` folder.
 
 </div>
+
+
+![Database Schema Diagram](./assets/database-diagram.svg)
+
 ---
 
 ## Overview of Project Objectives
@@ -120,6 +124,100 @@ The normalization step follows, where imported data are restructured and optimiz
 
 ---
 
-<footer>
-<p align="left">Visit my website: <a href="http://www.joaofenerichdata.com">www.joaofenerichdata.com</a></p>
-</footer>
+## Advanced SQL Query Example
+
+##### Analyzing Sales Data
+
+<div style="font-size:21px">
+
+
+This SQL query demonstrates how to aggregate sales data by team, filtering by product weight and sorting by team and user metrics, showcasing advanced data manipulation for strategic insights.
+
+</div>
+<div style="font-size:25px">
+```sql
+SELECT 
+    E.NM_EMPRESA AS 'Nome da Empresa',
+    T.NM_EQUIPE AS 'Nome da Equipe',
+    U.NM_USUARIO AS 'Nome do Usuário',
+    COUNT(P.CD_PRODUTO) AS 'Qtd de Produtos'
+FROM 
+    USUARIO U
+    JOIN EQUIPE_USUARIO EU ON U.CD_USUARIO = EU.CD_USUARIO
+    JOIN EQUIPE T ON EU.CD_EQUIPE = T.CD_EQUIPE
+    JOIN EMPRESA E ON T.CD_EMPRESA = E.CD_EMPRESA
+    JOIN EQUIPE_PRODUTO EP ON T.CD_EQUIPE = EP.CD_EQUIPE
+    JOIN PRODUTO P ON EP.CD_PRODUTO = P.CD_PRODUTO
+WHERE 
+    EP.NR_PESO > 0.10
+GROUP BY 
+    E.NM_EMPRESA, T.NM_EQUIPE, U.NM_USUARIO
+ORDER BY 
+    T.NM_EQUIPE, U.NM_USUARIO;
+```
+</div>
+
+---
+
+#### SQL Query Example: Top-Selling Products by Team
+###### Objective
+<div style="font-size:21px">
+
+This query identifies the top-selling products for each team, highlighting the use of CTEs and aggregate functions to extract meaningful sales insights.
+
+</div>
+<div style="font-size:25px">
+
+```sql
+WITH VendasPorProduto AS (
+    SELECT 
+        EP.CD_EQUIPE,
+        EP.CD_PRODUTO,
+        SUM(V.NR_QUANTIDADE) AS QtdVendida
+    FROM 
+        VENDA V
+        JOIN EQUIPE_PRODUTO EP ON V.CD_PRODUTO = EP.CD_PRODUTO
+    GROUP BY 
+        EP.CD_EQUIPE, EP.CD_PRODUTO
+), MaxVendasPorEquipe AS (
+    SELECT 
+        CD_EQUIPE,
+        MAX(QtdVendida) AS MaxVendas
+    FROM 
+        VendasPorProduto
+    GROUP BY 
+        CD_EQUIPE
+), ProdutosMaisVendidosPorEquipe AS (
+    SELECT 
+        VP.CD_EQUIPE,
+        VP.CD_PRODUTO,
+        VP.QtdVendida
+    FROM 
+        VendasPorProduto VP
+        INNER JOIN MaxVendasPorEquipe MV ON VP.CD_EQUIPE = MV.CD_EQUIPE AND VP.QtdVendida = MV.MaxVendas
+)
+SELECT 
+    E.Nm_EQUIPE AS 'Nome da Equipe',
+    P.Nm_PRODUTO AS 'Nome do Produto',
+    PMV.QtdVendida AS 'Qtd de Produtos Vendidos'
+FROM 
+    ProdutosMaisVendidosPorEquipe PMV
+    JOIN EQUIPE E ON PMV.CD_EQUIPE = E.CD_EQUIPE
+    JOIN PRODUTO P ON PMV.CD_PRODUTO = P.CD_PRODUTO
+ORDER BY 
+    E.Nm_EQUIPE, PMV.QtdVendida DESC;
+```
+</div>
+---
+
+<div style="justify-content: center; align-items: center; height: 100%;">
+
+## Connect with Me
+
+**Name**: João Fenerich
+
+[![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jlfenerich) 
+[![](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/jlafenerich)
+
+</div>
+</div>

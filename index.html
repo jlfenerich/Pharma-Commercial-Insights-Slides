@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -380,10 +445,11 @@ João Lucio de Azevedo Fenerich
 <section class="slide level1">
 
 <h2 id="data-normalization-and-structuring">Data Normalization and Structuring</h2>
-<div style="font-size:32px">
+<div style="font-size:26px">
 <p>The normalization step follows, where imported data are restructured and optimized. Scripts for this phase are available in the <code>sql_script/normalization</code> folder.</p>
 </div>
-</section>
+
+<img data-src="./assets/database-diagram.svg" class="r-stretch quarto-figure-center"><p class="caption">Database Schema Diagram</p></section>
 <section class="slide level1">
 
 <h2 id="overview-of-project-objectives">Overview of Project Objectives</h2>
@@ -438,19 +504,95 @@ João Lucio de Azevedo Fenerich
 </section>
 <section class="slide level1">
 
-<footer>
-<p align="left">
-Visit my website: <a href="http://www.joaofenerichdata.com">www.joaofenerichdata.com</a>
-</p>
-</footer>
+<h2 id="advanced-sql-query-example">Advanced SQL Query Example</h2>
+<h5 id="analyzing-sales-data">Analyzing Sales Data</h5>
+<div style="font-size:21px">
+<p>This SQL query demonstrates how to aggregate sales data by team, filtering by product weight and sorting by team and user metrics, showcasing advanced data manipulation for strategic insights.</p>
+</div>
+<div style="font-size:25px">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href=""></a><span class="kw">SELECT</span> </span>
+<span id="cb2-2"><a href=""></a>    E.NM_EMPRESA <span class="kw">AS</span> <span class="st">'Nome da Empresa'</span>,</span>
+<span id="cb2-3"><a href=""></a>    T.NM_EQUIPE <span class="kw">AS</span> <span class="st">'Nome da Equipe'</span>,</span>
+<span id="cb2-4"><a href=""></a>    U.NM_USUARIO <span class="kw">AS</span> <span class="st">'Nome do Usuário'</span>,</span>
+<span id="cb2-5"><a href=""></a>    <span class="fu">COUNT</span>(P.CD_PRODUTO) <span class="kw">AS</span> <span class="st">'Qtd de Produtos'</span></span>
+<span id="cb2-6"><a href=""></a><span class="kw">FROM</span> </span>
+<span id="cb2-7"><a href=""></a>    USUARIO U</span>
+<span id="cb2-8"><a href=""></a>    <span class="kw">JOIN</span> EQUIPE_USUARIO EU <span class="kw">ON</span> U.CD_USUARIO <span class="op">=</span> EU.CD_USUARIO</span>
+<span id="cb2-9"><a href=""></a>    <span class="kw">JOIN</span> EQUIPE T <span class="kw">ON</span> EU.CD_EQUIPE <span class="op">=</span> T.CD_EQUIPE</span>
+<span id="cb2-10"><a href=""></a>    <span class="kw">JOIN</span> EMPRESA E <span class="kw">ON</span> T.CD_EMPRESA <span class="op">=</span> E.CD_EMPRESA</span>
+<span id="cb2-11"><a href=""></a>    <span class="kw">JOIN</span> EQUIPE_PRODUTO EP <span class="kw">ON</span> T.CD_EQUIPE <span class="op">=</span> EP.CD_EQUIPE</span>
+<span id="cb2-12"><a href=""></a>    <span class="kw">JOIN</span> PRODUTO P <span class="kw">ON</span> EP.CD_PRODUTO <span class="op">=</span> P.CD_PRODUTO</span>
+<span id="cb2-13"><a href=""></a><span class="kw">WHERE</span> </span>
+<span id="cb2-14"><a href=""></a>    EP.NR_PESO <span class="op">&gt;</span> <span class="fl">0.10</span></span>
+<span id="cb2-15"><a href=""></a><span class="kw">GROUP</span> <span class="kw">BY</span> </span>
+<span id="cb2-16"><a href=""></a>    E.NM_EMPRESA, T.NM_EQUIPE, U.NM_USUARIO</span>
+<span id="cb2-17"><a href=""></a><span class="kw">ORDER</span> <span class="kw">BY</span> </span>
+<span id="cb2-18"><a href=""></a>    T.NM_EQUIPE, U.NM_USUARIO;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level1">
+
+<h4 id="sql-query-example-top-selling-products-by-team">SQL Query Example: Top-Selling Products by Team</h4>
+<h6 id="objective">Objective</h6>
+<div style="font-size:21px">
+<p>This query identifies the top-selling products for each team, highlighting the use of CTEs and aggregate functions to extract meaningful sales insights.</p>
+</div>
+<div style="font-size:25px">
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href=""></a><span class="kw">WITH</span> VendasPorProduto <span class="kw">AS</span> (</span>
+<span id="cb3-2"><a href=""></a>    <span class="kw">SELECT</span> </span>
+<span id="cb3-3"><a href=""></a>        EP.CD_EQUIPE,</span>
+<span id="cb3-4"><a href=""></a>        EP.CD_PRODUTO,</span>
+<span id="cb3-5"><a href=""></a>        <span class="fu">SUM</span>(V.NR_QUANTIDADE) <span class="kw">AS</span> QtdVendida</span>
+<span id="cb3-6"><a href=""></a>    <span class="kw">FROM</span> </span>
+<span id="cb3-7"><a href=""></a>        VENDA V</span>
+<span id="cb3-8"><a href=""></a>        <span class="kw">JOIN</span> EQUIPE_PRODUTO EP <span class="kw">ON</span> V.CD_PRODUTO <span class="op">=</span> EP.CD_PRODUTO</span>
+<span id="cb3-9"><a href=""></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> </span>
+<span id="cb3-10"><a href=""></a>        EP.CD_EQUIPE, EP.CD_PRODUTO</span>
+<span id="cb3-11"><a href=""></a>), MaxVendasPorEquipe <span class="kw">AS</span> (</span>
+<span id="cb3-12"><a href=""></a>    <span class="kw">SELECT</span> </span>
+<span id="cb3-13"><a href=""></a>        CD_EQUIPE,</span>
+<span id="cb3-14"><a href=""></a>        <span class="fu">MAX</span>(QtdVendida) <span class="kw">AS</span> MaxVendas</span>
+<span id="cb3-15"><a href=""></a>    <span class="kw">FROM</span> </span>
+<span id="cb3-16"><a href=""></a>        VendasPorProduto</span>
+<span id="cb3-17"><a href=""></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> </span>
+<span id="cb3-18"><a href=""></a>        CD_EQUIPE</span>
+<span id="cb3-19"><a href=""></a>), ProdutosMaisVendidosPorEquipe <span class="kw">AS</span> (</span>
+<span id="cb3-20"><a href=""></a>    <span class="kw">SELECT</span> </span>
+<span id="cb3-21"><a href=""></a>        VP.CD_EQUIPE,</span>
+<span id="cb3-22"><a href=""></a>        VP.CD_PRODUTO,</span>
+<span id="cb3-23"><a href=""></a>        VP.QtdVendida</span>
+<span id="cb3-24"><a href=""></a>    <span class="kw">FROM</span> </span>
+<span id="cb3-25"><a href=""></a>        VendasPorProduto VP</span>
+<span id="cb3-26"><a href=""></a>        <span class="kw">INNER</span> <span class="kw">JOIN</span> MaxVendasPorEquipe MV <span class="kw">ON</span> VP.CD_EQUIPE <span class="op">=</span> MV.CD_EQUIPE <span class="kw">AND</span> VP.QtdVendida <span class="op">=</span> MV.MaxVendas</span>
+<span id="cb3-27"><a href=""></a>)</span>
+<span id="cb3-28"><a href=""></a><span class="kw">SELECT</span> </span>
+<span id="cb3-29"><a href=""></a>    E.Nm_EQUIPE <span class="kw">AS</span> <span class="st">'Nome da Equipe'</span>,</span>
+<span id="cb3-30"><a href=""></a>    P.Nm_PRODUTO <span class="kw">AS</span> <span class="st">'Nome do Produto'</span>,</span>
+<span id="cb3-31"><a href=""></a>    PMV.QtdVendida <span class="kw">AS</span> <span class="st">'Qtd de Produtos Vendidos'</span></span>
+<span id="cb3-32"><a href=""></a><span class="kw">FROM</span> </span>
+<span id="cb3-33"><a href=""></a>    ProdutosMaisVendidosPorEquipe PMV</span>
+<span id="cb3-34"><a href=""></a>    <span class="kw">JOIN</span> EQUIPE E <span class="kw">ON</span> PMV.CD_EQUIPE <span class="op">=</span> E.CD_EQUIPE</span>
+<span id="cb3-35"><a href=""></a>    <span class="kw">JOIN</span> PRODUTO P <span class="kw">ON</span> PMV.CD_PRODUTO <span class="op">=</span> P.CD_PRODUTO</span>
+<span id="cb3-36"><a href=""></a><span class="kw">ORDER</span> <span class="kw">BY</span> </span>
+<span id="cb3-37"><a href=""></a>    E.Nm_EQUIPE, PMV.QtdVendida <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level1">
+
+<section id="connect-with-me" style="justify-content: center; align-items: center; height: 100%;">
+<h2>Connect with Me</h2>
+<p><strong>Name</strong>: João Fenerich</p>
+<p><a href="https://github.com/jlfenerich"><img data-src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&amp;logo=github&amp;logoColor=white.png"></a> <a href="https://linkedin.com/in/jlafenerich"><img data-src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&amp;logo=linkedin&amp;logoColor=white.png"></a></p>
+</section>
+</section></div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+
     </div>
-  </div>
+  
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="index_files/libs/revealjs/dist/reveal.js"></script>
