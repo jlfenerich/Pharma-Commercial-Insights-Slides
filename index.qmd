@@ -1,14 +1,16 @@
 ---
-title: "Pharma Commercial Insights"
+title: "Advanced SQL Analytics for Pharma Sales Insights"
 author: João Lucio de Azevedo Fenerich
 format: 
   revealjs:
     slide-level: 1
-    theme: moon
+    theme: default
     slide-number: c/t
+    controls: true
 ---
-
 ## Project Setup
+
+<div style="font-size:32px">
 
 ### Tools Used
 ![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927.svg?style=for-the-badge&logo=Microsoft-SQL-Server&logoColor=white) ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-007ACC.svg?style=for-the-badge&logo=Visual-Studio-Code&logoColor=white) ![DBeaver](https://img.shields.io/badge/DBeaver-382923.svg?style=for-the-badge&logo=DBeaver&logoColor=white)
@@ -22,10 +24,17 @@ The first step was to install and configure SQL Server on my machine and connect
 
 The second step of this project involves the careful import of data from CSV files into temporary tables in SQL Server.
 
+</div>
+
 ---
+ 
+## Github repository schema
+<a href="https://github.com/jlfenerich/Pharma-Commercial-Insights" style="margin-right: 10px;">
+    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Logo" style="border-radius: 10px;">
+</a>
 
-# Github repository schema
 
+<div style="font-size:27px">
 ```
 ├── README.md                                    <- Project documentation.
 ├── data
@@ -50,14 +59,66 @@ The second step of this project involves the careful import of data from CSV fil
 │       └── 2_Insert.sql                          <- Data insertion.
 ```
 
+</div>
+
 ---
 
 ## Data Normalization and Structuring
 
+<div style="font-size:32px">
+
 The normalization step follows, where imported data are restructured and optimized. Scripts for this phase are available in the `sql_script/normalization` folder.
+
+</div>
+---
+
+## Overview of Project Objectives
+
+##### Detailed Analysis of Sales Performance Across Different Metrics
+<div class="row" style="overflow:hidden;">
+<div class="column" style="float:left;width:49%;font-size:32px; border-right:2px solid #ccc; padding-right:20px; box-sizing: border-box;">
+
+- **Team and Product Analysis**
+  - Return "Company name", "Team name", "User name", and "Quantity of Products"
+  - **Filter**: Products > 10% weight
+  - **Sort**: By Team and User
+
+</div>
+<div class="column" style="float:right;width:49%;font-size:32px; padding-left:20px; box-sizing: border-box;">
+
+- **Best-Selling Products by Team**
+  - Return "Team name", "Product name", and "Quantity of Products sold"
+  - **Note**: Only for the top-sellers in each team
+
+</div>
+</div>
 
 ---
 
+## Key Sales Insights
+
+<div class="row" style="overflow:hidden;">
+<div class="column" style="float:left;width:49%;font-size:32px; border-right:2px solid #ccc; padding-right:20px; box-sizing: border-box;">
+
+##### Sales and Ranking in the First Semester
+
+- **Objective**: Return detailed sales data and rankings for the first semester
+  - **Data**: "Team name", "Product name", "User name", "Quantity of Products sold", and "Ranking"
+  - **Period**: January to June
+
+</div>
+<div class="column" style="float:right;width:49%;font-size:32px; padding-left:20px; box-sizing: border-box;">
+
+##### Objectives by Quarter
+
+- **Objective**: Analyze performance across quarters
+  - **Data**: "Team name", "User name", "Product name", "Quarter", and "average objectives per quarter"
+  - **Sort**: By "Team name", "User name", "Product name", and "average objectives per quarter" (descending)
+
+</div>
+</div>
+
+---
 
 <footer>
 <p align="left">Visit my website: <a href="http://www.joaofenerichdata.com">www.joaofenerichdata.com</a></p>

@@ -7,11 +7,11 @@
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.553">
 
-  <meta name="author" content="João Fenerich">
-  <title>Pharma Commercial Insights</title>
+  <meta name="author" content="João Lucio de Azevedo Fenerich">
+  <title>Advanced SQL Analytics for Pharma Sales Insights</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -321,17 +321,17 @@
     }
   </style>
 </head>
-<body class="quarto-dark">
+<body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Pharma Commercial Insights</h1>
+  <h1 class="title">Advanced SQL Analytics for Pharma Sales Insights</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-João Fenerich 
+João Lucio de Azevedo Fenerich 
 </div>
 </div>
 </div>
@@ -340,17 +340,101 @@ João Fenerich
 <section class="slide level1">
 
 <h2 id="project-setup">Project Setup</h2>
+<div style="font-size:32px">
 <h3 id="tools-used">Tools Used</h3>
 <p><img data-src="https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927.svg?style=for-the-badge&amp;logo=Microsoft-SQL-Server&amp;logoColor=white" alt="MicrosoftSQLServer"> <img data-src="https://img.shields.io/badge/Visual%20Studio%20Code-007ACC.svg?style=for-the-badge&amp;logo=Visual-Studio-Code&amp;logoColor=white" alt="Visual Studio Code"> <img data-src="https://img.shields.io/badge/DBeaver-382923.svg?style=for-the-badge&amp;logo=DBeaver&amp;logoColor=white" alt="DBeaver"></p>
 <h3 id="installation-and-configuration-of-sql-server-locally">Installation and Configuration of SQL Server Locally</h3>
 <p>The first step was to install and configure SQL Server on my machine and connect it to DBeaver for data handling.</p>
 <h3 id="csv-import-to-sql-server">CSV Import to SQL Server</h3>
 <p>The second step of this project involves the careful import of data from CSV files into temporary tables in SQL Server.</p>
+</div>
+</section>
+<section class="slide level1">
+
+<h2 id="github-repository-schema">Github repository schema</h2>
+<p><a href="https://github.com/jlfenerich/Pharma-Commercial-Insights" style="margin-right: 10px;"> <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="GitHub Logo" style="border-radius: 10px;"> </a></p>
+<div style="font-size:27px">
+<pre><code>├── README.md                                    &lt;- Project documentation.
+├── data
+│   ├── BASE_OBJETIVOS.csv                        &lt;- Raw data to be normalized.
+│   └── BASE_VENDAS.csv                           &lt;- Raw data to be normalized.
+│
+├── docs                                          &lt;- Diagram in .png
+│
+├── sql_scripts
+│   ├── normalization
+│   │   ├── LOAD_OBJETIVO.sql                     &lt;- Script to load normalized data into OBJETIVO table.
+│   │   ├── LOAD_VENDA.sql                        &lt;- Script to load normalized data into VENDA table.
+│   │   ├── Normalizacao_CreateTempTABLES.sql     &lt;- Script to create temporary table.
+│   │   ├── Normalizacao_InsertCSVtoTempTABLE.sql &lt;- Script to load CSV data into temporary table.
+│   │   ├── Normalizacao_TempObjetivos-CD.sql     &lt;- Script for normalization with related codes.
+│   │   └── Normalizacao_TempVendas-CD.sql        &lt;- Script for normalization with related codes.
+│   ├── queries
+│   │   └── 3_Perguntas.sql                       &lt;- Questions to be answered using the data.
+│   └── setup
+│       ├── 0_CreateDatabase.sql                  &lt;- Script to create the database.
+│       ├── 1_CreateTable.sql                     &lt;- Script to create relational tables.
+│       └── 2_Insert.sql                          &lt;- Data insertion.</code></pre>
+</div>
 </section>
 <section class="slide level1">
 
 <h2 id="data-normalization-and-structuring">Data Normalization and Structuring</h2>
+<div style="font-size:32px">
 <p>The normalization step follows, where imported data are restructured and optimized. Scripts for this phase are available in the <code>sql_script/normalization</code> folder.</p>
+</div>
+</section>
+<section class="slide level1">
+
+<h2 id="overview-of-project-objectives">Overview of Project Objectives</h2>
+<h5 id="detailed-analysis-of-sales-performance-across-different-metrics">Detailed Analysis of Sales Performance Across Different Metrics</h5>
+<div class="row" style="overflow:hidden;">
+<div class="column" style="float:left;width:49%;font-size:32px; border-right:2px solid #ccc; padding-right:20px; box-sizing: border-box;">
+<ul>
+<li><strong>Team and Product Analysis</strong>
+<ul>
+<li>Return “Company name”, “Team name”, “User name”, and “Quantity of Products”</li>
+<li><strong>Filter</strong>: Products &gt; 10% weight</li>
+<li><strong>Sort</strong>: By Team and User</li>
+</ul></li>
+</ul>
+</div>
+<div class="column" style="float:right;width:49%;font-size:32px; padding-left:20px; box-sizing: border-box;">
+<ul>
+<li><strong>Best-Selling Products by Team</strong>
+<ul>
+<li>Return “Team name”, “Product name”, and “Quantity of Products sold”</li>
+<li><strong>Note</strong>: Only for the top-sellers in each team</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section class="slide level1">
+
+<h2 id="key-sales-insights">Key Sales Insights</h2>
+<div class="row" style="overflow:hidden;">
+<div class="column" style="float:left;width:49%;font-size:32px; border-right:2px solid #ccc; padding-right:20px; box-sizing: border-box;">
+<h5 id="sales-and-ranking-in-the-first-semester">Sales and Ranking in the First Semester</h5>
+<ul>
+<li><strong>Objective</strong>: Return detailed sales data and rankings for the first semester
+<ul>
+<li><strong>Data</strong>: “Team name”, “Product name”, “User name”, “Quantity of Products sold”, and “Ranking”</li>
+<li><strong>Period</strong>: January to June</li>
+</ul></li>
+</ul>
+</div>
+<div class="column" style="float:right;width:49%;font-size:32px; padding-left:20px; box-sizing: border-box;">
+<h5 id="objectives-by-quarter">Objectives by Quarter</h5>
+<ul>
+<li><strong>Objective</strong>: Analyze performance across quarters
+<ul>
+<li><strong>Data</strong>: “Team name”, “User name”, “Product name”, “Quarter”, and “average objectives per quarter”</li>
+<li><strong>Sort</strong>: By “Team name”, “User name”, “Product name”, and “average objectives per quarter” (descending)</li>
+</ul></li>
+</ul>
+</div>
+</div>
 </section>
 <section class="slide level1">
 
@@ -389,7 +473,7 @@ Visit my website: <a href="http://www.joaofenerichdata.com">www.joaofenerichdata
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': true,
+'controlsAuto': false,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
@@ -399,7 +483,7 @@ Visit my website: <a href="http://www.joaofenerichdata.com">www.joaofenerichdata
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: false,
+        controls: true,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
